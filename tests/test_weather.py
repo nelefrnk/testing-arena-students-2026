@@ -113,6 +113,23 @@ def test_filter_by_temperature_list():
     assert type(filter_by_temperature(measurements, 15.0, 20.0)) == list
 
 
+def test_filter_by_temperature_emptylist():
+    measurements = []
+
+    assert filter_by_temperature(measurements, 15.0, 18.5) == []
+
+
+def test_filter_by_temperature_samelimit():
+    measurements = [
+                ("Köln", 600, 10.0),
+                ("Düsseldorf", 720, 18.5),
+                ("Bonn", 900, 25.0),
+            ]
+        
+    assert filter_by_temperature(measurements, 15.0, 15.0) == []
+    assert filter_by_temperature(measurements, 18.5, 18.5) == [("Düsseldorf", 720, 18.5)]
+
+
 def test_average_temperature_regular_values():
     measurements = [
         ("Köln", 600, 10.0),
